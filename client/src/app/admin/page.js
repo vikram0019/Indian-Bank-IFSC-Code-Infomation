@@ -78,7 +78,15 @@ export default function AdminPage() {
           <div key={log._id} className="border border-gray-200 dark:border-gray-800 rounded-lg p-3 text-sm">
             <div className="flex justify-between">
               <span>{formatDate(log.runAt)}</span>
-              <span className={log.status === 'success' ? 'text-green-700' : 'text-red-600'}>{log.status}</span>
+              <span
+                className={
+                  log.status === 'success'
+                    ? 'text-green-700 dark:text-green-400 font-medium'
+                    : 'text-red-600 dark:text-red-400 font-medium'
+                }
+              >
+                {log.status}
+              </span>
             </div>
             <p className="text-gray-500 mt-1">
               +{log.addedCount} / ~{log.modifiedCount} / -{log.removedCount} — total {log.totalRecordsAfter}

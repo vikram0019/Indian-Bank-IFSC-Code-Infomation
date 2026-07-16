@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getBranchByIfsc } from '@/lib/api';
 import { bankOrCreditUnionJsonLd } from '@/lib/jsonld';
 import AdSlot from '@/components/AdSlot';
+import FlagBadge from '@/components/FlagBadge';
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -10,11 +12,9 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 function FlagRow({ label, active }) {
   return (
-    <div className="flex justify-between border-b border-gray-100 dark:border-gray-800 py-2">
+    <div className="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 py-2 last:border-b-0">
       <span className="text-gray-600 dark:text-gray-400">{label}</span>
-      <span className={active ? 'text-green-700 font-medium' : 'text-gray-400'}>
-        {active ? 'Available' : 'Not available'}
-      </span>
+      <FlagBadge label={active ? 'Available' : 'Not available'} active={active} />
     </div>
   );
 }
@@ -53,7 +53,12 @@ export default async function IfscDetailPage({ params }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(bankOrCreditUnionJsonLd(branch, siteUrl)) }}
         />
 
-        <p className="font-mono text-sm text-blue-700 dark:text-blue-300 mb-1">{branch.IFSC}</p>
+        <Link href="/" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+          &larr; Back to search
+        </Link>
+
+        <p className="text-xs uppercase tracking-wide text-gray-500 mt-3 mb-1">IFSC Code</p>
+        <p className="font-mono text-lg text-blue-700 dark:text-blue-300 mb-1">{branch.IFSC}</p>
         <h1 className="text-2xl font-bold mb-1">{branch.BANK || branch.BANKCODE}</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-6">{branch.BRANCH}</p>
 

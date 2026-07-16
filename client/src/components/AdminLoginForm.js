@@ -20,7 +20,7 @@ export default function AdminLoginForm({ onSubmit, error }) {
         placeholder="Admin secret"
         className="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2 bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
       <button type="submit" className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg font-medium">
         Log in
       </button>
