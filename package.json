@@ -1,0 +1,15 @@
+{
+  "name": "indian-bank-ifsc-code-information",
+  "version": "1.0.0",
+  "description": "REST API for looking up Indian bank branch information by IFSC code",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
