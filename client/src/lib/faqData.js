@@ -19,4 +19,24 @@ export const faqs = [
     answer:
       'Yes, the IFSC code is the same across NEFT, RTGS, and IMPS — but not every branch supports every mode. Check the branch detail page on this site for which transfer modes are available at a specific branch.',
   },
+  {
+    question: 'Is the IFSC code the same as the branch code?',
+    answer:
+      'No. An IFSC code and a branch code are different things, though related. The branch code is usually the last 6 characters of the IFSC — a shorter identifier used internally by some banks — while the IFSC is the full 11-character code required for NEFT/RTGS/IMPS transfers.',
+  },
+  {
+    question: 'What is a branch code?',
+    answer:
+      "A branch code narrows down a single location within a bank, the way a house number narrows down an address on a street. It's a shorter, informal identifier some banks use internally, separate from the full IFSC that online transfer systems actually require.",
+  },
+  {
+    question: 'Where can I find my IFSC code?',
+    answer:
+      "Your IFSC code is printed on your bank passbook and cheque leaf. You can also search for it on this site by bank name and city, or by branch name.",
+  },
+  {
+    question: 'Does the IFSC code change if a bank merges with another bank?',
+    answer:
+      'Yes. When banks merge, branches are usually migrated to the acquiring bank\'s IFSC codes over time, so an old IFSC code may stop working. Always verify the current IFSC code before making a transfer if the bank has recently been involved in a merger.',
+  },
 ];

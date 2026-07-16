@@ -36,6 +36,13 @@ export async function searchByBranchName(name, params = {}) {
   return res.json();
 }
 
+export async function getCitiesForBank(bank) {
+  const qs = new URLSearchParams({ bank });
+  const res = await apiFetch(`/api/bank-cities?${qs.toString()}`);
+  if (!res.ok) throw new Error(`Failed to fetch cities for bank: ${res.status}`);
+  return res.json();
+}
+
 export async function suggest(q, type) {
   const qs = new URLSearchParams({ q, ...(type ? { type } : {}) });
   const res = await fetch(`${PUBLIC_API_URL}/api/suggest?${qs.toString()}`, { cache: 'no-store' });
