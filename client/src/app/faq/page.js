@@ -11,13 +11,12 @@ export const metadata = {
 };
 
 const TOC_ITEMS = [
-  { id: 'what-is-ifsc', label: 'What is IFSC code?' },
-  { id: 'how-to-find', label: 'How to find IFSC code?' },
-  { id: 'benefits-ifsc', label: 'Benefits of IFSC code' },
-  { id: 'benefits-micr', label: 'Benefits of MICR code' },
-  { id: 'charges', label: 'NEFT/RTGS/IMPS charges & timing' },
-  { id: 'how-to-transfer', label: 'How to transfer money with IFSC' },
-  { id: 'ifsc-vs-micr', label: 'Difference: IFSC vs MICR' },
+  { id: 'ifsc-explained', label: 'IFSC codes, explained' },
+  { id: 'finding-your-code', label: 'Finding your code' },
+  { id: 'why-it-matters', label: 'Why it matters' },
+  { id: 'micr-code', label: 'MICR: the cheque code' },
+  { id: 'transfer-methods', label: 'NEFT vs RTGS vs IMPS' },
+  { id: 'how-it-works', label: 'How a transfer is routed' },
   { id: 'faq', label: 'FAQs' },
   { id: 'popular-banks', label: 'Popular banks' },
 ];
@@ -41,130 +40,135 @@ export default function FaqPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-10">
         <div className="max-w-2xl">
-          <Section id="what-is-ifsc" title="What is IFSC code?">
+          <Section id="ifsc-explained" title="IFSC codes, explained">
             <p className="text-gray-700 dark:text-gray-300">
-              IFSC (Indian Financial System Code) is a unique 11-character alphanumeric code
-              allotted by the Reserve Bank of India (RBI) to every bank branch in India. It is
-              required for electronic fund transfers — NEFT, RTGS, and IMPS. The first 4
-              characters identify the bank, the 5th character is always &quot;0&quot;, and the
-              last 6 characters identify the specific branch.
+              Every bank branch in India that participates in electronic payments carries an
+              eleven-character code called an IFSC (Indian Financial System Code), issued by the
+              Reserve Bank of India. Read left to right, it packs in three pieces of information:
+              the first four letters name the bank, a fixed &quot;0&quot; sits in the fifth spot
+              as a separator, and the remaining six characters pin down the exact branch. Banking
+              systems rely on this code, rather than a branch address, to route NEFT, RTGS, and
+              IMPS transfers to the right place.
             </p>
           </Section>
 
-          <Section id="how-to-find" title="How to find IFSC code?">
-            <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-300">
-              <li>Check your bank passbook or cheque leaf — the IFSC is usually printed there.</li>
-              <li>Search by IFSC code, bank + city, or branch name on this site.</li>
-              <li>Check the bank&apos;s official website for a branch locator.</li>
-            </ul>
-          </Section>
-
-          <Section id="benefits-ifsc" title="Benefits of IFSC code">
-            <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-300">
-              <li>Uniquely identifies a bank and its exact branch.</li>
-              <li>Reduces errors during electronic fund transfers.</li>
-              <li>Required and validated for NEFT, RTGS, and IMPS transactions.</li>
-            </ul>
-          </Section>
-
-          <Section id="benefits-micr" title="Benefits of MICR code">
-            <p className="text-gray-700 dark:text-gray-300">
-              MICR (Magnetic Ink Character Recognition) code enables fast, accurate, machine
-              processing of cheques using magnetic ink and optical character recognition,
-              reducing manual handling errors in cheque clearing.
-            </p>
-          </Section>
-
-          <Section id="charges" title="NEFT / RTGS / IMPS charges & timing">
-            <p className="text-sm text-gray-500 mb-3">
-              Charges are indicative — each bank sets its own fees within RBI limits. Always
-              confirm with your bank.
-            </p>
-            <div className="overflow-x-auto border border-gray-200 dark:border-gray-800 rounded-lg">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-gray-50 dark:bg-gray-900 text-left text-gray-600 dark:text-gray-400">
-                    <th className="px-4 py-2 font-medium">Amount</th>
-                    <th className="px-4 py-2 font-medium">NEFT</th>
-                    <th className="px-4 py-2 font-medium">RTGS</th>
-                    <th className="px-4 py-2 font-medium">IMPS</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-t border-gray-100 dark:border-gray-800">
-                    <td className="px-4 py-2">Up to &#8377;10,000</td>
-                    <td className="px-4 py-2">&#8377;2.50</td>
-                    <td className="px-4 py-2">Min. &#8377;2 Lakh</td>
-                    <td className="px-4 py-2">&#8377;5.00</td>
-                  </tr>
-                  <tr className="border-t border-gray-100 dark:border-gray-800">
-                    <td className="px-4 py-2">&#8377;10,000 &ndash; &#8377;2 Lakh</td>
-                    <td className="px-4 py-2">&#8377;15.00</td>
-                    <td className="px-4 py-2">&#8377;26.00</td>
-                    <td className="px-4 py-2">&#8377;10.00</td>
-                  </tr>
-                  <tr className="border-t border-gray-100 dark:border-gray-800">
-                    <td className="px-4 py-2">Above &#8377;2 Lakh</td>
-                    <td className="px-4 py-2">&#8377;25.00</td>
-                    <td className="px-4 py-2">&#8377;51.00</td>
-                    <td className="px-4 py-2">&#8377;15.00</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-300 mt-3 text-sm">
-              <li>NEFT: 8 AM &ndash; 7 PM (weekdays)</li>
-              <li>RTGS: 9 AM &ndash; 4:30 PM (weekdays)</li>
-              <li>IMPS: 24 hours, 365 days</li>
-            </ul>
-          </Section>
-
-          <Section id="how-to-transfer" title="How to transfer money with IFSC code">
+          <Section id="finding-your-code" title="Finding your code">
             <p className="text-gray-700 dark:text-gray-300 mb-3">
-              The IFSC code tells the banking system exactly which bank and branch to route a
-              transfer to:
+              The fastest option is usually the one you&apos;re already using: type a bank name
+              and city, a branch name, or the code itself into the search box on this page and
+              you&apos;ll get the branch record directly.
             </p>
-            <ol className="list-decimal pl-5 space-y-1 text-gray-700 dark:text-gray-300">
-              <li>The first 4 characters identify the bank (e.g. ICIC for ICICI Bank).</li>
-              <li>The 5th character is always &quot;0&quot;.</li>
-              <li>The last 6 characters identify the specific branch.</li>
-            </ol>
-            <p className="text-gray-700 dark:text-gray-300 mt-3">
-              To send money, the payer provides the payee&apos;s bank name, branch, account
-              number, and IFSC code via NEFT, RTGS, or IMPS. The transfer is then routed directly
-              to the correct branch.
+            <p className="text-gray-700 dark:text-gray-300">
+              If you&apos;d rather confirm it another way, it&apos;s also printed on the first
+              page of your passbook and along the bottom of every cheque leaf, and most banks
+              list it in the branch locator on their own website.
             </p>
           </Section>
 
-          <Section id="ifsc-vs-micr" title="Difference between IFSC and MICR code">
+          <Section id="why-it-matters" title="Why it matters">
+            <p className="text-gray-700 dark:text-gray-300">
+              Two branches of the same bank — even two branches in the same city — never share an
+              IFSC, so the code is the one piece of routing information a transfer can&apos;t
+              succeed without. Get the account number right but the IFSC wrong and the payment
+              either bounces back or, worse, lands at an unintended branch. Entering it correctly
+              is what lets NEFT, RTGS, and IMPS confirm a transfer in minutes rather than needing
+              manual verification.
+            </p>
+          </Section>
+
+          <Section id="micr-code" title="MICR: the cheque code">
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              MICR (Magnetic Ink Character Recognition) solves a similar problem for paper
+              cheques instead of electronic transfers. It&apos;s a nine-digit number printed in
+              special magnetic ink so that cheque-sorting machines can read it optically without
+              manual data entry, which is what lets banks clear large volumes of cheques quickly
+              and with fewer errors.
+            </p>
             <div className="overflow-x-auto border border-gray-200 dark:border-gray-800 rounded-lg">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-gray-50 dark:bg-gray-900 text-left text-gray-600 dark:text-gray-400">
-                    <th className="px-4 py-2 font-medium">IFSC Code</th>
-                    <th className="px-4 py-2 font-medium">MICR Code</th>
+                    <th className="px-4 py-2 font-medium"> </th>
+                    <th className="px-4 py-2 font-medium">IFSC</th>
+                    <th className="px-4 py-2 font-medium">MICR</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="border-t border-gray-100 dark:border-gray-800">
-                    <td className="px-4 py-2">Used for electronic transfers (NEFT/RTGS/IMPS)</td>
-                    <td className="px-4 py-2">Used for cheque processing</td>
+                    <td className="px-4 py-2 text-gray-500">Used for</td>
+                    <td className="px-4 py-2">Online transfers &mdash; NEFT, RTGS, IMPS</td>
+                    <td className="px-4 py-2">Cheque clearing</td>
                   </tr>
                   <tr className="border-t border-gray-100 dark:border-gray-800">
-                    <td className="px-4 py-2">11-character alphanumeric code</td>
-                    <td className="px-4 py-2">9-digit numeric code</td>
+                    <td className="px-4 py-2 text-gray-500">Format</td>
+                    <td className="px-4 py-2">11 characters, letters + digits</td>
+                    <td className="px-4 py-2">9 digits</td>
                   </tr>
                   <tr className="border-t border-gray-100 dark:border-gray-800">
-                    <td className="px-4 py-2">First 4 characters identify the bank</td>
-                    <td className="px-4 py-2">First 3 digits identify the city</td>
+                    <td className="px-4 py-2 text-gray-500">First part identifies</td>
+                    <td className="px-4 py-2">The bank</td>
+                    <td className="px-4 py-2">The city</td>
                   </tr>
                   <tr className="border-t border-gray-100 dark:border-gray-800">
-                    <td className="px-4 py-2">Last 6 characters identify the branch</td>
-                    <td className="px-4 py-2">Last 3 digits identify the branch</td>
+                    <td className="px-4 py-2 text-gray-500">Last part identifies</td>
+                    <td className="px-4 py-2">The branch</td>
+                    <td className="px-4 py-2">The branch</td>
                   </tr>
                 </tbody>
               </table>
             </div>
+          </Section>
+
+          <Section id="transfer-methods" title="NEFT vs RTGS vs IMPS">
+            <p className="text-gray-700 dark:text-gray-300 mb-3">
+              All three move money using the same IFSC, but they differ in when they run and what
+              a bank is allowed to charge for them. Figures below are typical fee ceilings — your
+              bank sets its own charges under these limits, and many banks now waive NEFT fees
+              entirely for savings accounts, so treat this as a rough guide rather than a quote.
+            </p>
+            <div className="overflow-x-auto border border-gray-200 dark:border-gray-800 rounded-lg">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-900 text-left text-gray-600 dark:text-gray-400">
+                    <th className="px-4 py-2 font-medium">Method</th>
+                    <th className="px-4 py-2 font-medium">Available</th>
+                    <th className="px-4 py-2 font-medium">Typical fee (up to &#8377;10k)</th>
+                    <th className="px-4 py-2 font-medium">Typical fee (above &#8377;2L)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-t border-gray-100 dark:border-gray-800">
+                    <td className="px-4 py-2 font-medium">NEFT</td>
+                    <td className="px-4 py-2">8 AM&ndash;7 PM, weekdays</td>
+                    <td className="px-4 py-2">&#8377;2&ndash;3</td>
+                    <td className="px-4 py-2">up to &#8377;25</td>
+                  </tr>
+                  <tr className="border-t border-gray-100 dark:border-gray-800">
+                    <td className="px-4 py-2 font-medium">RTGS</td>
+                    <td className="px-4 py-2">9 AM&ndash;4:30 PM, weekdays</td>
+                    <td className="px-4 py-2">not applicable (&#8377;2L minimum)</td>
+                    <td className="px-4 py-2">up to &#8377;50</td>
+                  </tr>
+                  <tr className="border-t border-gray-100 dark:border-gray-800">
+                    <td className="px-4 py-2 font-medium">IMPS</td>
+                    <td className="px-4 py-2">24&times;7, every day</td>
+                    <td className="px-4 py-2">&#8377;5&ndash;10</td>
+                    <td className="px-4 py-2">up to &#8377;15</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </Section>
+
+          <Section id="how-it-works" title="How a transfer is routed">
+            <p className="text-gray-700 dark:text-gray-300">
+              When you send money, your bank&apos;s system reads the recipient&apos;s IFSC in two
+              stages: the bank-identifying prefix tells it which clearing network to hand the
+              payment off to, and once it arrives at that bank, the branch-identifying suffix
+              tells that bank&apos;s internal systems which branch — and therefore which account
+              — should receive it. That&apos;s the whole reason the code needs to be exact:
+              a single wrong character can point a payment at a completely different branch.
+            </p>
           </Section>
 
           <Section id="faq" title="Frequently Asked Questions">

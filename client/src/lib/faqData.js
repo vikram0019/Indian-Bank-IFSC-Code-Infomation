@@ -27,7 +27,7 @@ export const faqs = [
   {
     question: 'What is a branch code?',
     answer:
-      'A branch code is a unique identifying number for a specific branch of a bank, typically the last 6 digits of that branch\'s IFSC code.',
+      "A branch code narrows down a single location within a bank, the way a house number narrows down an address on a street. It's a shorter, informal identifier some banks use internally, separate from the full IFSC that online transfer systems actually require.",
   },
   {
     question: 'Where can I find my IFSC code?',
