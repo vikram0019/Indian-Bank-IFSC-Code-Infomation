@@ -15,9 +15,12 @@ async function searchByBankAndCity(req, res, next) {
     }
     const { page, limit, skip } = paginationParams(req);
 
-    const bankRegex = new RegExp(escapeRegex(bank), 'i');
+    // Match by bank NAME prefix, not BANKCODE: many IFSC codes carry another
+    // bank's routing prefix (e.g. small banks' IMPS-only codes start with
+    // "HDFC" because they settle via HDFC's rails), so BANKCODE alone would
+    // incorrectly pull in unrelated banks that happen to share a code prefix.
     const filter = {
-      $or: [{ BANK: bankRegex }, { BANKCODE: bank.toUpperCase() }],
+      BANK: new RegExp(`^${escapeRegex(bank)}`, 'i'),
       CITY: new RegExp(`^${escapeRegex(city)}$`, 'i'),
     };
 

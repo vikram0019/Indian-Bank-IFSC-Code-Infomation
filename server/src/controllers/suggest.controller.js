@@ -30,18 +30,21 @@ async function suggest(req, res, next) {
     if (!type || type === 'bank') {
       tasks.push(
         Branch.find({ BANK: prefix })
-          .limit(SUGGEST_LIMIT)
-          .select('BANK BANKCODE')
+          .limit(SUGGEST_LIMIT * 3)
+          .select('BANK')
           .lean()
           .then((rows) => {
             const seen = new Set();
             return rows
               .filter((r) => {
-                if (seen.has(r.BANKCODE)) return false;
-                seen.add(r.BANKCODE);
+                if (!r.BANK || seen.has(r.BANK)) return false;
+                seen.add(r.BANK);
                 return true;
               })
-              .map((r) => ({ type: 'bank', label: r.BANK, value: r.BANKCODE }));
+              .slice(0, SUGGEST_LIMIT)
+              // value is the bank NAME, not BANKCODE: BANKCODE is derived from the
+              // IFSC prefix and isn't a reliable bank identifier (see search.controller.js).
+              .map((r) => ({ type: 'bank', label: r.BANK, value: r.BANK }));
           })
       );
     }
@@ -55,6 +58,26 @@ async function suggest(req, res, next) {
           .then((rows) =>
             rows.map((r) => ({ type: 'branch', label: `${r.BRANCH} (${r.BANK})`, value: r.IFSC }))
           )
+      );
+    }
+
+    if (type === 'city') {
+      tasks.push(
+        Branch.find({ CITY: prefix })
+          .limit(SUGGEST_LIMIT * 5)
+          .select('CITY STATE')
+          .lean()
+          .then((rows) => {
+            const seen = new Set();
+            return rows
+              .filter((r) => {
+                if (!r.CITY || seen.has(r.CITY)) return false;
+                seen.add(r.CITY);
+                return true;
+              })
+              .slice(0, SUGGEST_LIMIT)
+              .map((r) => ({ type: 'city', label: `${r.CITY}, ${r.STATE}`, value: r.CITY }));
+          })
       );
     }
 

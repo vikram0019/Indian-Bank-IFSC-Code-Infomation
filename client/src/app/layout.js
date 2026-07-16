@@ -37,8 +37,16 @@ export default function RootLayout({ children }) {
             <Link href="/" className="font-bold text-lg">
               IFSC Finder
             </Link>
-            <nav className="text-sm flex gap-4 text-gray-600 dark:text-gray-400">
-              <Link href="/faq">FAQ</Link>
+            <nav className="text-sm flex items-center gap-4">
+              <Link
+                href="/"
+                className="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700"
+              >
+                🔍 New Search
+              </Link>
+              <Link href="/faq" className="text-gray-600 dark:text-gray-400 hover:underline">
+                FAQ
+              </Link>
             </nav>
           </div>
         </header>

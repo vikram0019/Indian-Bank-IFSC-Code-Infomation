@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import SearchBar from './SearchBar';
-import BranchCard from './BranchCard';
+import ResultsTable from './ResultsTable';
 import { searchByBranchName } from '@/lib/api';
 
 const TABS = [
@@ -12,8 +12,8 @@ const TABS = [
   { id: 'branch', label: 'By Branch Name' },
 ];
 
-function slugifyCity(city) {
-  return city.trim().toLowerCase().replace(/\s+/g, '-');
+function slugify(value) {
+  return value.trim().toLowerCase().replace(/\s+/g, '-');
 }
 
 export default function SearchTabs() {
@@ -23,7 +23,7 @@ export default function SearchTabs() {
   const [ifscQuery, setIfscQuery] = useState('');
 
   const [bankQuery, setBankQuery] = useState('');
-  const [bankCode, setBankCode] = useState(null);
+  const [bankName, setBankName] = useState(null);
   const [city, setCity] = useState('');
 
   const [branchQuery, setBranchQuery] = useState('');
@@ -37,8 +37,8 @@ export default function SearchTabs() {
 
   function handleBankSubmit(e) {
     e.preventDefault();
-    if (bankCode && city.trim()) {
-      router.push(`/bank/${bankCode}/${slugifyCity(city)}`);
+    if (bankName && city.trim()) {
+      router.push(`/bank/${slugify(bankName)}/${slugify(city)}`);
     }
   }
 
@@ -97,33 +97,35 @@ export default function SearchTabs() {
               value={bankQuery}
               onChange={(v) => {
                 setBankQuery(v);
-                setBankCode(null);
+                setBankName(null);
               }}
               suggestType="bank"
               onSelectSuggestion={(item) => {
                 setBankQuery(item.label);
-                setBankCode(item.value);
+                setBankName(item.value);
               }}
               placeholder="Bank name e.g. State Bank of India"
             />
           </div>
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="City e.g. Mumbai"
-            className="border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2 bg-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
+          <div className="flex-1">
+            <SearchBar
+              value={city}
+              onChange={setCity}
+              suggestType="city"
+              onSelectSuggestion={(item) => setCity(item.value)}
+              placeholder="City or town e.g. Mumbai"
+            />
+          </div>
           <button
             type="submit"
-            disabled={!bankCode || !city.trim()}
+            disabled={!bankName || !city.trim()}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium disabled:opacity-40"
           >
             Search
           </button>
         </form>
       )}
-      {activeTab === 'bank' && !bankCode && bankQuery && (
+      {activeTab === 'bank' && !bankName && bankQuery && (
         <p className="text-xs text-gray-500 mt-2">Pick a bank from the suggestions to continue.</p>
       )}
 
@@ -145,13 +147,12 @@ export default function SearchTabs() {
           </form>
           {branchLoading && <p className="text-sm text-gray-500 mt-3">Searching...</p>}
           {branchResults && !branchLoading && (
-            <div className="mt-4 space-y-3">
-              {branchResults.length === 0 && (
+            <div className="mt-4">
+              {branchResults.length === 0 ? (
                 <p className="text-sm text-gray-500">No branches found for &quot;{branchQuery}&quot;.</p>
+              ) : (
+                <ResultsTable results={branchResults} />
               )}
-              {branchResults.map((branch) => (
-                <BranchCard key={branch.IFSC} branch={branch} />
-              ))}
             </div>
           )}
         </>
