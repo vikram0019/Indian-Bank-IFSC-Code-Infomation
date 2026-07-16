@@ -1,5 +1,7 @@
+import Link from 'next/link';
 import SearchTabs from '@/components/SearchTabs';
 import FaqAccordion from '@/components/FaqAccordion';
+import PopularBanks from '@/components/PopularBanks';
 import AdSlot from '@/components/AdSlot';
 import { faqs } from '@/lib/faqData';
 
@@ -23,8 +25,17 @@ export default function Home() {
       </div>
 
       <section className="mt-16">
+        <PopularBanks />
+      </section>
+
+      <section className="mt-16">
         <h2 className="text-xl font-semibold mb-4">Frequently Asked Questions</h2>
         <FaqAccordion faqs={faqs} />
+        <p className="text-sm mt-4">
+          <Link href="/faq" className="text-blue-600 dark:text-blue-400 hover:underline">
+            Read the full IFSC &amp; MICR guide &rarr;
+          </Link>
+        </p>
       </section>
     </div>
   );

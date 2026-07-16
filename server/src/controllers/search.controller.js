@@ -35,6 +35,34 @@ async function searchByBankAndCity(req, res, next) {
   }
 }
 
+async function citiesForBank(req, res, next) {
+  try {
+    const { bank } = req.query;
+    if (!bank) {
+      return res.status(400).json({ error: 'bank query param is required' });
+    }
+
+    const bankRegex = new RegExp(`^${escapeRegex(bank)}`, 'i');
+
+    const [cities, sample] = await Promise.all([
+      Branch.aggregate([
+        { $match: { BANK: bankRegex } },
+        { $group: { _id: { city: '$CITY', state: '$STATE' }, count: { $sum: 1 } } },
+        { $sort: { '_id.city': 1 } },
+        { $limit: 500 },
+      ]),
+      Branch.findOne({ BANK: bankRegex }).select('BANK').lean(),
+    ]);
+
+    res.json({
+      bank: sample?.BANK || bank,
+      cities: cities.map((c) => ({ city: c._id.city, state: c._id.state, count: c.count })),
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function searchByBranchName(req, res, next) {
   try {
     const { name } = req.query;
@@ -56,4 +84,4 @@ async function searchByBranchName(req, res, next) {
   }
 }
 
-module.exports = { searchByBankAndCity, searchByBranchName };
+module.exports = { searchByBankAndCity, searchByBranchName, citiesForBank };
