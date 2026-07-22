@@ -1,0 +1,8 @@
+# Only our own plugin is source-controlled; everything else here is installed
+# via `wp plugin install` / `wp theme install` per README.md (mirrors how
+# node_modules/ isn't committed for the Node app).
+wp-content/plugins/*
+!wp-content/plugins/ifsc-finder/
+wp-content/themes/*
+
+.env

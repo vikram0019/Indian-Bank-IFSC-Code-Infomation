@@ -1,0 +1,145 @@
+/* IFSC Finder — plugin styles. Mirrors the color/spacing system used in the
+   Next.js version of this app (client/src/app/globals.css + component classes),
+   including light/dark mode support. */
+
+:root {
+    --ifsc-border: #e5e7eb;
+    --ifsc-border-strong: #d1d5db;
+    --ifsc-muted: #6b7280;
+    --ifsc-muted-2: #9ca3af;
+    --ifsc-bg-subtle: #f9fafb;
+    --ifsc-blue: #2563eb;
+    --ifsc-blue-hover: #1d4ed8;
+    --ifsc-blue-bg: #eff6ff;
+    --ifsc-blue-text: #1d4ed8;
+    --ifsc-green-bg: #f0fdf4;
+    --ifsc-green-text: #15803d;
+    --ifsc-green-ring: rgba(22, 163, 74, 0.2);
+    --ifsc-gray-bg: #f9fafb;
+    --ifsc-gray-text: #6b7280;
+    --ifsc-gray-ring: rgba(107, 114, 128, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ifsc-border: #27272a;
+        --ifsc-muted: #9ca3af;
+        --ifsc-bg-subtle: #18181b;
+        --ifsc-blue-bg: #172554;
+        --ifsc-blue-text: #93c5fd;
+        --ifsc-green-bg: rgba(74, 222, 128, 0.1);
+        --ifsc-green-text: #4ade80;
+        --ifsc-green-ring: rgba(74, 222, 128, 0.2);
+        --ifsc-gray-bg: rgba(156, 163, 175, 0.05);
+        --ifsc-gray-text: #6b7280;
+        --ifsc-gray-ring: rgba(156, 163, 175, 0.1);
+    }
+}
+
+.ifsc-main { padding: 24px 0; }
+.ifsc-container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+.ifsc-layout { display: grid; grid-template-columns: 1fr; gap: 32px; }
+@media (min-width: 1024px) {
+    .ifsc-layout { grid-template-columns: 1fr 300px; }
+}
+.ifsc-sidebar { display: none; }
+@media (min-width: 1024px) { .ifsc-sidebar { display: block; } }
+
+.ifsc-muted { color: var(--ifsc-muted); }
+.ifsc-mt { margin-top: 16px; }
+.ifsc-mb { margin-bottom: 16px; }
+
+.ifsc-back-link { font-size: 14px; color: var(--ifsc-blue); text-decoration: none; }
+.ifsc-back-link:hover { text-decoration: underline; }
+
+.ifsc-eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ifsc-muted); margin: 12px 0 4px; }
+.ifsc-code-large { font-family: ui-monospace, monospace; font-size: 18px; color: var(--ifsc-blue-text); margin: 0 0 4px; }
+
+.ifsc-detail-box { border: 1px solid var(--ifsc-border); border-radius: 8px; padding: 16px; margin-bottom: 24px; font-size: 14px; }
+.ifsc-detail-row { display: flex; justify-content: space-between; padding: 6px 0; gap: 16px; }
+.ifsc-detail-row span:first-child { color: var(--ifsc-muted); flex-shrink: 0; }
+.ifsc-detail-row span:last-child { text-align: right; }
+.ifsc-flag-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--ifsc-border); }
+.ifsc-flag-row:last-child { border-bottom: none; }
+.ifsc-flag-row span:first-child { color: var(--ifsc-muted); }
+
+.ifsc-notfound { text-align: center; padding: 80px 0; }
+
+/* Badges */
+.ifsc-badge { display: inline-block; padding: 2px 10px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.ifsc-badge--active { background: var(--ifsc-green-bg); color: var(--ifsc-green-text); box-shadow: inset 0 0 0 1px var(--ifsc-green-ring); }
+.ifsc-badge--inactive { background: var(--ifsc-gray-bg); color: var(--ifsc-gray-text); box-shadow: inset 0 0 0 1px var(--ifsc-gray-ring); }
+.ifsc-badge-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Ad slots */
+.ifsc-ad-slot { display: flex; align-items: center; justify-content: center; border: 1px dashed var(--ifsc-border-strong); border-radius: 6px; color: var(--ifsc-muted-2); font-size: 12px; }
+.ifsc-ad-slot--sidebar { width: 300px; height: 250px; }
+.ifsc-ad-slot--footer { width: 100%; max-width: 728px; height: 90px; margin: 16px auto; }
+.ifsc-ad-slot--inline { width: 100%; max-width: 468px; height: 60px; margin: 32px auto 0; }
+
+/* Results table */
+.ifsc-table-wrap { overflow-x: auto; border: 1px solid var(--ifsc-border); border-radius: 8px; }
+.ifsc-results-table, .ifsc-content-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.ifsc-results-table thead tr, .ifsc-content-table thead tr { background: var(--ifsc-bg-subtle); text-align: left; color: var(--ifsc-muted); }
+.ifsc-results-table th, .ifsc-results-table td, .ifsc-content-table th, .ifsc-content-table td { padding: 8px 16px; }
+.ifsc-results-table tbody tr { border-top: 1px solid var(--ifsc-border); }
+.ifsc-content-table tbody tr { border-top: 1px solid var(--ifsc-border); }
+.ifsc-code-link { font-family: ui-monospace, monospace; color: var(--ifsc-blue-text); text-decoration: none; }
+.ifsc-code-link:hover { text-decoration: underline; }
+
+/* City grid + filter */
+.ifsc-city-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 640px) { .ifsc-city-grid { grid-template-columns: 1fr 1fr; } }
+.ifsc-city-link { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--ifsc-border); border-radius: 8px; padding: 8px 16px; font-size: 14px; text-decoration: none; color: inherit; }
+.ifsc-city-link:hover { border-color: var(--ifsc-blue); }
+
+/* Inputs / buttons */
+.ifsc-input { width: 100%; border: 1px solid var(--ifsc-border-strong); border-radius: 8px; padding: 8px 16px; background: transparent; color: inherit; }
+.ifsc-input:focus { outline: none; box-shadow: 0 0 0 2px var(--ifsc-blue); }
+.ifsc-btn-primary { padding: 8px 16px; background: var(--ifsc-blue); color: #fff; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; }
+.ifsc-btn-primary:hover { background: var(--ifsc-blue-hover); }
+.ifsc-btn-primary:disabled { opacity: 0.4; cursor: default; }
+.ifsc-hint { font-size: 12px; color: var(--ifsc-muted); margin: 8px 0 0; flex-basis: 100%; }
+
+/* Search tabs */
+.ifsc-search-tabs { }
+.ifsc-tabs-nav { display: flex; gap: 8px; border-bottom: 1px solid var(--ifsc-border); margin-bottom: 16px; }
+.ifsc-tab-btn { padding: 8px 16px; font-size: 14px; font-weight: 500; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; color: var(--ifsc-muted); cursor: pointer; }
+.ifsc-tab-btn.is-active { border-bottom-color: var(--ifsc-blue); color: var(--ifsc-blue); }
+.ifsc-form-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+.ifsc-flex-1 { flex: 1 1 200px; position: relative; }
+
+/* Autosuggest dropdown */
+.ifsc-autosuggest { position: relative; }
+.ifsc-suggest-list { position: absolute; z-index: 10; left: 0; right: 0; margin-top: 4px; border: 1px solid var(--ifsc-border); border-radius: 8px; background: var(--ifsc-bg-subtle); box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-height: 260px; overflow-y: auto; list-style: none; padding: 0; }
+.ifsc-suggest-list li button { width: 100%; text-align: left; padding: 8px 16px; font-size: 14px; background: none; border: none; cursor: pointer; color: inherit; }
+.ifsc-suggest-list li button:hover { background: var(--ifsc-blue-bg); }
+
+/* Popular banks */
+.ifsc-popular-banks h2 { margin-bottom: 12px; }
+.ifsc-bank-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.ifsc-bank-pill { padding: 6px 14px; font-size: 14px; border: 1px solid var(--ifsc-border); border-radius: 9999px; text-decoration: none; color: inherit; }
+.ifsc-bank-pill:hover { border-color: var(--ifsc-blue); color: var(--ifsc-blue); }
+
+/* FAQ accordion */
+.ifsc-faq-accordion { display: flex; flex-direction: column; gap: 10px; }
+.ifsc-faq-item { border: 1px solid var(--ifsc-border); border-radius: 8px; }
+.ifsc-faq-question { width: 100%; text-align: left; padding: 12px 16px; font-weight: 500; background: none; border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: inherit; font-size: 15px; }
+.ifsc-faq-answer { padding: 0 16px 12px; font-size: 14px; color: var(--ifsc-muted); margin: 0; }
+
+/* Guide page */
+.ifsc-guide-layout { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 24px; }
+@media (min-width: 1024px) { .ifsc-guide-layout { grid-template-columns: 1fr 220px; } }
+.ifsc-guide-content { max-width: 640px; }
+.ifsc-section { margin-bottom: 48px; scroll-margin-top: 80px; }
+.ifsc-section h2 { font-size: 20px; margin-bottom: 12px; }
+.ifsc-section p { line-height: 1.6; margin-bottom: 12px; }
+.ifsc-toc { display: none; }
+@media (min-width: 1024px) {
+    .ifsc-toc { display: block; position: sticky; top: 32px; align-self: start; font-size: 14px; }
+}
+.ifsc-toc-title { font-weight: 600; margin-bottom: 8px; color: var(--ifsc-muted); }
+.ifsc-toc ul { list-style: none; margin: 0; padding-left: 12px; border-left: 1px solid var(--ifsc-border); }
+.ifsc-toc li { margin-bottom: 6px; }
+.ifsc-toc a { color: var(--ifsc-muted); text-decoration: none; }
+.ifsc-toc a:hover { color: var(--ifsc-blue); }
