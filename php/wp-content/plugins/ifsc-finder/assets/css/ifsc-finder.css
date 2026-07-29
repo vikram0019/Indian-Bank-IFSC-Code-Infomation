@@ -36,6 +36,11 @@
     }
 }
 
+/* Kadence's page hero/title banner is redundant site-wide: every page and
+   shortcode this plugin owns (Home, the Guide page, IFSC/bank templates)
+   already renders its own <h1>, so the theme's duplicate big title is hidden. */
+.entry-hero { display: none !important; }
+
 .ifsc-main { padding: 24px 0; }
 .ifsc-container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
 .ifsc-layout { display: grid; grid-template-columns: 1fr; gap: 32px; }
