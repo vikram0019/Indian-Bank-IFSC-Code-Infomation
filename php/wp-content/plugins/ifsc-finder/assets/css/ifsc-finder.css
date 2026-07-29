@@ -119,8 +119,13 @@
 @media (min-width: 640px) {
     .ifsc-form-row { flex-direction: row; align-items: flex-start; }
     .ifsc-form-row .ifsc-btn-primary { width: auto; }
+    .ifsc-flex-1 { flex: 1 1 200px; }
 }
-.ifsc-flex-1 { flex: 1 1 200px; position: relative; }
+/* flex-basis: 200px only makes sense once .ifsc-form-row is horizontal (above);
+   on mobile (column direction) that same basis controls height, not width,
+   forcing each input wrapper to a fixed 200px tall box regardless of its
+   actual ~42px content. Content-sized by default, fixed-basis added at 640px. */
+.ifsc-flex-1 { flex: 1 1 auto; position: relative; }
 
 /* Autosuggest dropdown */
 .ifsc-autosuggest { position: relative; }
