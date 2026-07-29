@@ -113,7 +113,7 @@
 .ifsc-tab-btn.is-active { border-bottom-color: var(--ifsc-blue); color: var(--ifsc-blue); }
 /* Stacked full-width on mobile, side-by-side from the sm breakpoint up —
    mirrors the Next.js version's `flex flex-col sm:flex-row` + `w-full sm:w-auto`. */
-.ifsc-form-row { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.ifsc-form-row { display: flex; flex-direction: column; flex-wrap: wrap; gap: 8px; align-items: stretch; }
 .ifsc-form-row .ifsc-btn-primary { width: 100%; }
 @media (min-width: 640px) {
     .ifsc-form-row { flex-direction: row; align-items: flex-start; }
