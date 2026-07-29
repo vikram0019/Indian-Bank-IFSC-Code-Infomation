@@ -74,7 +74,7 @@ export default function SearchTabs() {
       </div>
 
       {activeTab === 'ifsc' && (
-        <form onSubmit={handleIfscSubmit} className="flex gap-2">
+        <form onSubmit={handleIfscSubmit} className="flex flex-col sm:flex-row gap-2">
           <div className="flex-1">
             <SearchBar
               value={ifscQuery}
@@ -84,7 +84,7 @@ export default function SearchTabs() {
               placeholder="Enter IFSC code e.g. SBIN0000001"
             />
           </div>
-          <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium">
+          <button type="submit" className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg font-medium">
             Search
           </button>
         </form>
@@ -119,7 +119,7 @@ export default function SearchTabs() {
           <button
             type="submit"
             disabled={!bankName || !city.trim()}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium disabled:opacity-40"
+            className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg font-medium disabled:opacity-40"
           >
             Search
           </button>
@@ -131,7 +131,7 @@ export default function SearchTabs() {
 
       {activeTab === 'branch' && (
         <>
-          <form onSubmit={handleBranchSubmit} className="flex gap-2">
+          <form onSubmit={handleBranchSubmit} className="flex flex-col sm:flex-row gap-2">
             <div className="flex-1">
               <SearchBar
                 value={branchQuery}
@@ -141,7 +141,7 @@ export default function SearchTabs() {
                 placeholder="Branch name e.g. Fort Mumbai"
               />
             </div>
-            <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium">
+            <button type="submit" className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg font-medium">
               Search
             </button>
           </form>
