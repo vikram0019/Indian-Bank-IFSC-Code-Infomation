@@ -44,6 +44,10 @@
 .ifsc-main { padding: 24px 0; }
 .ifsc-container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
 .ifsc-layout { display: grid; grid-template-columns: 1fr; gap: 32px; }
+/* Grid items default to min-width: auto, so a wide non-wrapping table
+   (min-width: 640px, see .ifsc-results-table) blows out the whole grid
+   column instead of staying contained with its own internal scrollbar. */
+.ifsc-layout > * { min-width: 0; }
 @media (min-width: 1024px) {
     .ifsc-layout { grid-template-columns: 1fr 300px; }
 }
@@ -83,10 +87,10 @@
 .ifsc-ad-slot--inline { width: 100%; max-width: 468px; height: 60px; margin: 32px auto 0; }
 
 /* Results table */
-.ifsc-table-wrap { overflow-x: auto; border: 1px solid var(--ifsc-border); border-radius: 8px; }
-.ifsc-results-table, .ifsc-content-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.ifsc-table-wrap { overflow-x: auto; border: 1px solid var(--ifsc-border); border-radius: 8px; -webkit-overflow-scrolling: touch; }
+.ifsc-results-table, .ifsc-content-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px; }
 .ifsc-results-table thead tr, .ifsc-content-table thead tr { background: var(--ifsc-bg-subtle); text-align: left; color: var(--ifsc-muted); }
-.ifsc-results-table th, .ifsc-results-table td, .ifsc-content-table th, .ifsc-content-table td { padding: 8px 16px; }
+.ifsc-results-table th, .ifsc-results-table td, .ifsc-content-table th, .ifsc-content-table td { padding: 8px 16px; white-space: nowrap; }
 .ifsc-results-table tbody tr { border-top: 1px solid var(--ifsc-border); }
 .ifsc-content-table tbody tr { border-top: 1px solid var(--ifsc-border); }
 .ifsc-code-link { font-family: ui-monospace, monospace; color: var(--ifsc-blue-text); text-decoration: none; }
