@@ -106,7 +106,14 @@
 .ifsc-tabs-nav { display: flex; gap: 8px; border-bottom: 1px solid var(--ifsc-border); margin-bottom: 16px; }
 .ifsc-tab-btn { padding: 8px 16px; font-size: 14px; font-weight: 500; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; color: var(--ifsc-muted); cursor: pointer; }
 .ifsc-tab-btn.is-active { border-bottom-color: var(--ifsc-blue); color: var(--ifsc-blue); }
-.ifsc-form-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+/* Stacked full-width on mobile, side-by-side from the sm breakpoint up —
+   mirrors the Next.js version's `flex flex-col sm:flex-row` + `w-full sm:w-auto`. */
+.ifsc-form-row { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.ifsc-form-row .ifsc-btn-primary { width: 100%; }
+@media (min-width: 640px) {
+    .ifsc-form-row { flex-direction: row; align-items: flex-start; }
+    .ifsc-form-row .ifsc-btn-primary { width: auto; }
+}
 .ifsc-flex-1 { flex: 1 1 200px; position: relative; }
 
 /* Autosuggest dropdown */
