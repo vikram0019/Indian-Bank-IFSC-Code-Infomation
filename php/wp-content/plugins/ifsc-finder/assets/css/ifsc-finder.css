@@ -125,7 +125,7 @@
 .ifsc-autosuggest { position: relative; }
 .ifsc-suggest-list { position: absolute; z-index: 10; top: 100%; left: 0; right: 0; width: auto; max-width: none !important; min-width: 100%; margin-top: 4px; border: 1px solid var(--ifsc-border); border-radius: 8px; background: var(--ifsc-bg-subtle); box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-height: 260px; overflow-y: auto; overflow-x: hidden; list-style: none; padding: 0; box-sizing: border-box; }
 .ifsc-suggest-list li { list-style: none; margin: 0; padding: 0; }
-.ifsc-suggest-list li button { display: block; width: 100%; max-width: none; text-align: left; padding: 8px 16px; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: none; border: none; cursor: pointer; color: inherit; box-sizing: border-box; }
+.ifsc-suggest-list li button { display: block; width: 100%; max-width: none; text-align: left; padding: 8px 16px; font-size: 14px; white-space: normal; word-break: break-word; line-height: 1.4; background: none; border: none; cursor: pointer; color: inherit; box-sizing: border-box; }
 .ifsc-suggest-list li button:hover { background: var(--ifsc-blue-bg); }
 
 /* Popular banks */
