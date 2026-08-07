@@ -181,7 +181,11 @@ class Ifsc_Importer
         $sql = "INSERT INTO {$table} (" . implode(',', $columns) . ") VALUES " . implode(',', $placeholders)
             . " ON DUPLICATE KEY UPDATE {$update_clause}, updated_at = NOW()";
 
-        $wpdb->query($wpdb->prepare($sql, $values));
+        $result = $wpdb->query($wpdb->prepare($sql, $values));
+
+        if ($result === false) {
+            throw new Exception('Batch insert failed: ' . $wpdb->last_error);
+        }
 
         // $wpdb doesn't expose per-row inserted-vs-updated counts for a multi-row
         // upsert; approximate: rows_affected is 1 per insert, 2 per update in MySQL.

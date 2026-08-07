@@ -45,10 +45,10 @@ class Ifsc_Activator
             updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             PRIMARY KEY (id),
             UNIQUE KEY uniq_ifsc (ifsc),
-            KEY idx_bank (bank),
-            KEY idx_city (city),
-            KEY idx_branch (branch),
-            KEY idx_bank_city (bank, city)
+            KEY idx_bank (bank(191)),
+            KEY idx_city (city(191)),
+            KEY idx_branch (branch(191)),
+            KEY idx_bank_city (bank(80), city(80))
         ) {$charset_collate};";
 
         $sql_changelog = "CREATE TABLE {$changelog_table} (
