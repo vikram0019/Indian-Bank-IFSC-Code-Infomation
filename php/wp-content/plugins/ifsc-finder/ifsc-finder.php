@@ -81,4 +81,9 @@ add_action('wp_footer', function () {
         return;
     }
     echo '<div class="ifsc-container">' . ifsc_finder_ad_slot('footer') . '</div>';
+
+    $privacy_url = function_exists('get_privacy_policy_url') ? get_privacy_policy_url() : '';
+    if ($privacy_url) {
+        echo '<div class="ifsc-container ifsc-footer-links"><a href="' . esc_url($privacy_url) . '">Privacy Policy</a></div>';
+    }
 });

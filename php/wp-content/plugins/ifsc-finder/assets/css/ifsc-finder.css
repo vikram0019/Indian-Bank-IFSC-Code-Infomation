@@ -84,6 +84,10 @@
 .ifsc-ad-slot { display: flex; align-items: center; justify-content: center; border: 1px dashed var(--ifsc-border-strong); border-radius: 6px; color: var(--ifsc-muted-2); font-size: 12px; }
 .ifsc-ad-slot--sidebar { width: 300px; height: 250px; }
 .ifsc-ad-slot--footer { width: 100%; max-width: 728px; height: 90px; margin: 16px auto; }
+
+.ifsc-footer-links { text-align: center; padding: 8px 0 16px; }
+.ifsc-footer-links a { font-size: 13px; color: var(--ifsc-muted); text-decoration: none; }
+.ifsc-footer-links a:hover { color: var(--ifsc-blue); text-decoration: underline; }
 .ifsc-ad-slot--inline { width: 100%; max-width: 468px; height: 60px; margin: 32px auto 0; }
 
 /* Results table */
