@@ -90,6 +90,13 @@ add_action('wp_footer', function () {
 });
 
 /**
+ * Google Search Console site ownership verification (HTML tag method).
+ */
+add_action('wp_head', function () {
+    echo '<meta name="google-site-verification" content="z5K9ecXRr8I6KMe_phNwmrzkbUszd4nZDituaZ38Vi8" />' . "\n";
+}, 1);
+
+/**
  * Meta description + Open Graph/Twitter tags for the front page. Real WP
  * pages get a canonical automatically from core's rel_canonical(), so only
  * the custom routes in Ifsc_Seo need to supply their own.
