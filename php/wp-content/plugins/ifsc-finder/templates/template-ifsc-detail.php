@@ -14,6 +14,9 @@ if (!$branch) {
     add_filter('pre_get_document_title', function () use ($ifsc_code) {
         return "IFSC {$ifsc_code} not found | " . get_bloginfo('name');
     });
+    add_action('wp_head', function () {
+        echo '<meta name="robots" content="noindex,follow">' . "\n";
+    });
     get_header();
     echo '<main class="ifsc-main"><div class="ifsc-container ifsc-notfound">';
     echo '<h1>Not found</h1><p>We couldn\'t find what you were looking for.</p>';
@@ -42,12 +45,11 @@ $canonical_url = home_url('/ifsc/' . $branch['ifsc']);
 add_filter('pre_get_document_title', function () use ($page_title) {
     return $page_title . ' | ' . get_bloginfo('name');
 });
-add_action('wp_head', function () use ($description, $page_title, $canonical_url) {
-    echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
-    echo '<meta property="og:title" content="' . esc_attr($page_title) . '">' . "\n";
-    echo '<meta property="og:description" content="' . esc_attr($description) . '">' . "\n";
-    echo '<meta property="og:url" content="' . esc_url($canonical_url) . '">' . "\n";
-});
+Ifsc_Seo::head_tags([
+    'title' => $page_title,
+    'description' => $description,
+    'url' => $canonical_url,
+]);
 
 get_header();
 ?>

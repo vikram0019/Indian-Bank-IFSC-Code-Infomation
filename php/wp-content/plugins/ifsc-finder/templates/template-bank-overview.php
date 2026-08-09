@@ -12,6 +12,9 @@ $bank_name_prefix = Ifsc_Rewrite::unslugify($bank_slug);
 $data = Ifsc_DB::cities_for_bank($bank_name_prefix);
 
 if (empty($data['cities'])) {
+    add_action('wp_head', function () {
+        echo '<meta name="robots" content="noindex,follow">' . "\n";
+    });
     get_header();
     echo '<main class="ifsc-main"><div class="ifsc-container ifsc-notfound">';
     echo '<h1>Not found</h1><p>We couldn\'t find what you were looking for.</p>';
@@ -24,13 +27,16 @@ if (empty($data['cities'])) {
 $bank_name = $data['bank'];
 $page_title = "{$bank_name} IFSC Codes — Find Branches by City";
 $description = "Browse {$bank_name} branches by city or town and find IFSC codes, MICR codes, and NEFT/RTGS/IMPS availability.";
+$canonical_url = home_url('/bank/' . $bank_slug);
 
 add_filter('pre_get_document_title', function () use ($page_title) {
     return $page_title . ' | ' . get_bloginfo('name');
 });
-add_action('wp_head', function () use ($description) {
-    echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
-});
+Ifsc_Seo::head_tags([
+    'title' => $page_title,
+    'description' => $description,
+    'url' => $canonical_url,
+]);
 
 get_header();
 ?>
