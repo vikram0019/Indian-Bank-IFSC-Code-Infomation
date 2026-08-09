@@ -105,10 +105,17 @@
 .ifsc-code-link:hover { text-decoration: underline; }
 
 /* City grid + filter */
+#ifsc-city-filter-input { margin-bottom: 16px; }
 .ifsc-city-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
 @media (min-width: 640px) { .ifsc-city-grid { grid-template-columns: 1fr 1fr; } }
 .ifsc-city-link { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--ifsc-border); border-radius: 8px; padding: 8px 16px; font-size: 14px; text-decoration: none; color: inherit; }
 .ifsc-city-link:hover { border-color: var(--ifsc-blue); }
+
+.ifsc-pagination { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; }
+.ifsc-page-btn { padding: 6px 14px; font-size: 14px; border: 1px solid var(--ifsc-border-strong); border-radius: 8px; background: none; color: inherit; cursor: pointer; }
+.ifsc-page-btn:hover:not(:disabled) { border-color: var(--ifsc-blue); color: var(--ifsc-blue); }
+.ifsc-page-btn:disabled { opacity: 0.4; cursor: default; }
+.ifsc-page-status { font-size: 14px; color: var(--ifsc-muted); }
 
 /* Inputs / buttons */
 .ifsc-input { width: 100%; border: 1px solid var(--ifsc-border-strong); border-radius: 8px; padding: 8px 16px; background: transparent; color: inherit; }

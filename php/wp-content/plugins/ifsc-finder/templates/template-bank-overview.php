@@ -63,6 +63,7 @@ get_header();
                 <?php endforeach; ?>
             </div>
             <p id="ifsc-city-filter-empty" class="ifsc-muted" style="display:none;">No matching city or town found.</p>
+            <nav id="ifsc-city-pagination" class="ifsc-pagination" aria-label="City pagination" hidden></nav>
         </div>
         <aside class="ifsc-sidebar"><?php echo ifsc_finder_ad_slot('sidebar'); ?></aside>
     </div>
