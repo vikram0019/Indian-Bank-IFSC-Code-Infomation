@@ -38,7 +38,7 @@ add_action('wp_head', function () use ($description) {
 get_header();
 ?>
 <main class="ifsc-main">
-    <div class="ifsc-container ifsc-layout">
+    <div class="ifsc-container ifsc-layout ifsc-layout--stack">
         <div>
             <a class="ifsc-back-link" href="<?php echo esc_url(home_url('/')); ?>">&larr; Back to search</a>
             <h1 class="ifsc-mt"><?php echo esc_html($bank_name); ?> Branches in <?php echo esc_html($city_name); ?></h1>

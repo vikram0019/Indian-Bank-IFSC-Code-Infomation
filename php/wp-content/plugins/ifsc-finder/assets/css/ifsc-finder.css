@@ -50,6 +50,10 @@
 .ifsc-layout > * { min-width: 0; }
 @media (min-width: 1024px) {
     .ifsc-layout { grid-template-columns: 1fr 300px; }
+    /* Results-table pages: a wide data table needs the full content column,
+       not a 736px slice next to a 300px ad. Stack the ad below instead of
+       beside so the table gets the page's full width. */
+    .ifsc-layout--stack { grid-template-columns: 1fr; }
 }
 .ifsc-sidebar { display: none; }
 @media (min-width: 1024px) { .ifsc-sidebar { display: block; } }
