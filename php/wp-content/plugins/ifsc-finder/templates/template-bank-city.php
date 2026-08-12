@@ -15,6 +15,9 @@ $city_name = Ifsc_Rewrite::unslugify($city_slug);
 $data = Ifsc_DB::search_by_bank_and_city($bank_name_prefix, $city_name, 1, 100);
 
 if (empty($data['results'])) {
+    add_action('wp_head', function () {
+        echo '<meta name="robots" content="noindex,follow">' . "\n";
+    });
     get_header();
     echo '<main class="ifsc-main"><div class="ifsc-container ifsc-notfound">';
     echo '<h1>Not found</h1><p>We couldn\'t find what you were looking for.</p>';
@@ -27,18 +30,21 @@ if (empty($data['results'])) {
 $bank_name = $data['results'][0]['bank'] ?: $bank_name_prefix;
 $page_title = "{$bank_name} Branches in {$city_name} — IFSC Codes";
 $description = "Browse all {$bank_name} branches in {$city_name} with IFSC codes, addresses, and MICR codes.";
+$canonical_url = home_url('/bank/' . $bank_slug . '/' . $city_slug);
 
 add_filter('pre_get_document_title', function () use ($page_title) {
     return $page_title . ' | ' . get_bloginfo('name');
 });
-add_action('wp_head', function () use ($description) {
-    echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
-});
+Ifsc_Seo::head_tags([
+    'title' => $page_title,
+    'description' => $description,
+    'url' => $canonical_url,
+]);
 
 get_header();
 ?>
 <main class="ifsc-main">
-    <div class="ifsc-container ifsc-layout">
+    <div class="ifsc-container ifsc-layout ifsc-layout--stack">
         <div>
             <a class="ifsc-back-link" href="<?php echo esc_url(home_url('/')); ?>">&larr; Back to search</a>
             <h1 class="ifsc-mt"><?php echo esc_html($bank_name); ?> Branches in <?php echo esc_html($city_name); ?></h1>

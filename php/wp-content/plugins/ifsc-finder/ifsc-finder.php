@@ -28,6 +28,7 @@ require_once IFSC_FINDER_DIR . 'includes/class-ifsc-sitemap.php';
 require_once IFSC_FINDER_DIR . 'includes/class-ifsc-cron.php';
 require_once IFSC_FINDER_DIR . 'includes/class-ifsc-jsonld.php';
 require_once IFSC_FINDER_DIR . 'includes/class-ifsc-adsense.php';
+require_once IFSC_FINDER_DIR . 'includes/class-ifsc-seo.php';
 
 if (defined('WP_CLI') && WP_CLI) {
     require_once IFSC_FINDER_DIR . 'includes/class-ifsc-cli-command.php';
@@ -87,3 +88,33 @@ add_action('wp_footer', function () {
         echo '<div class="ifsc-container ifsc-footer-links"><a href="' . esc_url($privacy_url) . '">Privacy Policy</a></div>';
     }
 });
+
+/**
+ * Google Search Console site ownership verification (HTML tag method).
+ */
+add_action('wp_head', function () {
+    echo '<meta name="google-site-verification" content="z5K9ecXRr8I6KMe_phNwmrzkbUszd4nZDituaZ38Vi8" />' . "\n";
+}, 1);
+
+/**
+ * Meta description + Open Graph/Twitter tags for the front page. Real WP
+ * pages get a canonical automatically from core's rel_canonical(), so only
+ * the custom routes in Ifsc_Seo need to supply their own.
+ */
+add_action('wp_head', function () {
+    if (!is_front_page()) {
+        return;
+    }
+    $description = 'Search any Indian bank branch by IFSC code, bank name, or city to instantly find MICR codes, addresses, and NEFT/RTGS/IMPS/UPI availability.';
+    $title = wp_get_document_title();
+    $url = home_url('/');
+    echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta property="og:type" content="website">' . "\n";
+    echo '<meta property="og:site_name" content="' . esc_attr(get_bloginfo('name')) . '">' . "\n";
+    echo '<meta property="og:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta property="og:description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta property="og:url" content="' . esc_url($url) . '">' . "\n";
+    echo '<meta name="twitter:card" content="summary">' . "\n";
+    echo '<meta name="twitter:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta name="twitter:description" content="' . esc_attr($description) . '">' . "\n";
+}, 5);

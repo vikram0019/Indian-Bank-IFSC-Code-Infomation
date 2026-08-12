@@ -27,6 +27,31 @@ class Ifsc_AdSense
         add_action('wp_head', [__CLASS__, 'print_verification_meta'], 1);
         add_action('wp_head', [__CLASS__, 'print_auto_ads_script'], 1);
         add_action('admin_post_ifsc_finder_save_adsense', [__CLASS__, 'handle_save']);
+        add_action('template_redirect', [__CLASS__, 'maybe_serve_ads_txt']);
+    }
+
+    /**
+     * AdSense requires an ads.txt at the site root declaring the publisher
+     * as an authorized seller (Search Console's "Ads.txt status" check).
+     * Generated on the fly from the same client ID used everywhere else,
+     * rather than a static file that could drift out of sync.
+     */
+    public static function maybe_serve_ads_txt()
+    {
+        $path = trim((string) parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+        if ($path !== 'ads.txt') {
+            return;
+        }
+
+        $client_id = self::get_client_id();
+        $pub_id = preg_replace('/^ca-/', '', $client_id);
+
+        status_header(200);
+        header('Content-Type: text/plain; charset=utf-8');
+        if ($pub_id) {
+            echo "google.com, {$pub_id}, DIRECT, f08c47fec0942fa0\n";
+        }
+        exit;
     }
 
     public static function get_client_id()
