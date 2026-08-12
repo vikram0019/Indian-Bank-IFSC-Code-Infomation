@@ -46,6 +46,7 @@ class Ifsc_AdSense
         $client_id = self::get_client_id();
         $pub_id = preg_replace('/^ca-/', '', $client_id);
 
+        status_header(200);
         header('Content-Type: text/plain; charset=utf-8');
         if ($pub_id) {
             echo "google.com, {$pub_id}, DIRECT, f08c47fec0942fa0\n";
