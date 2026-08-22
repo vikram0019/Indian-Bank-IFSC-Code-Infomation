@@ -9,13 +9,19 @@ if (!defined('ABSPATH')) {
  * the _nopriv_ hook) and emails the site admin; no data is stored in the DB.
  */
 add_shortcode('ifsc_contact_form', function () {
+    $site_key = Ifsc_Recaptcha::get_site_key();
+
     ob_start();
     ?>
     <div class="ifsc-contact-form">
         <?php if (isset($_GET['contact_sent'])) : ?>
             <p class="ifsc-notice ifsc-notice--success">Thanks for reaching out — we'll get back to you soon.</p>
         <?php elseif (isset($_GET['contact_error'])) : ?>
-            <p class="ifsc-notice ifsc-notice--error">Please fill in your name, a valid email, and a message before sending.</p>
+            <p class="ifsc-notice ifsc-notice--error">Please fill in your name, a valid email, and a message, and complete the "I'm not a robot" check before sending.</p>
+        <?php endif; ?>
+
+        <?php if ($site_key) : ?>
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <?php endif; ?>
 
         <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
@@ -41,6 +47,12 @@ add_shortcode('ifsc_contact_form', function () {
                 <textarea id="ifsc-contact-message" name="message" class="ifsc-input" rows="5" required></textarea>
             </p>
 
+            <?php if ($site_key) : ?>
+                <p class="ifsc-field">
+                    <div class="g-recaptcha" data-sitekey="<?php echo esc_attr($site_key); ?>"></div>
+                </p>
+            <?php endif; ?>
+
             <button type="submit" class="ifsc-btn-primary">Send Message</button>
         </form>
     </div>
@@ -63,10 +75,11 @@ function ifsc_finder_handle_contact_submit()
     $name = sanitize_text_field(wp_unslash($_POST['name'] ?? ''));
     $email = sanitize_email(wp_unslash($_POST['email'] ?? ''));
     $message = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
+    $recaptcha_token = sanitize_text_field(wp_unslash($_POST['g-recaptcha-response'] ?? ''));
 
     $base_url = remove_query_arg(['contact_sent', 'contact_error'], $redirect_to);
 
-    if (!$name || !is_email($email) || !$message) {
+    if (!$name || !is_email($email) || !$message || !Ifsc_Recaptcha::verify($recaptcha_token)) {
         wp_safe_redirect(add_query_arg('contact_error', '1', $base_url));
         exit;
     }

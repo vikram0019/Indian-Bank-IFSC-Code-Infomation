@@ -29,6 +29,7 @@ require_once IFSC_FINDER_DIR . 'includes/class-ifsc-cron.php';
 require_once IFSC_FINDER_DIR . 'includes/class-ifsc-jsonld.php';
 require_once IFSC_FINDER_DIR . 'includes/class-ifsc-adsense.php';
 require_once IFSC_FINDER_DIR . 'includes/class-ifsc-seo.php';
+require_once IFSC_FINDER_DIR . 'includes/class-ifsc-recaptcha.php';
 
 if (defined('WP_CLI') && WP_CLI) {
     require_once IFSC_FINDER_DIR . 'includes/class-ifsc-cli-command.php';
@@ -44,6 +45,7 @@ Ifsc_Sitemap::init();
 Ifsc_Cron::init();
 Ifsc_JsonLd::init();
 Ifsc_AdSense::init();
+Ifsc_Recaptcha::init();
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('ifsc-finder', IFSC_FINDER_URL . 'assets/css/ifsc-finder.css', [], IFSC_FINDER_VERSION);
