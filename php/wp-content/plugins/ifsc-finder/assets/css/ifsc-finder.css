@@ -126,6 +126,16 @@
 .ifsc-btn-primary:disabled { opacity: 0.4; cursor: default; }
 .ifsc-hint { font-size: 12px; color: var(--ifsc-muted); margin: 8px 0 0; flex-basis: 100%; }
 
+/* Contact form */
+.ifsc-contact-form { max-width: 480px; margin-top: 16px; }
+.ifsc-contact-form .ifsc-field { margin-bottom: 16px; }
+.ifsc-contact-form label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+.ifsc-contact-form textarea.ifsc-input { resize: vertical; font-family: inherit; font-size: 14px; }
+.ifsc-hp-field { position: absolute; left: -9999px; }
+.ifsc-notice { padding: 10px 16px; border-radius: 8px; font-size: 14px; margin-bottom: 16px; }
+.ifsc-notice--success { background: var(--ifsc-green-bg); color: var(--ifsc-green-text); }
+.ifsc-notice--error { background: var(--ifsc-gray-bg); color: var(--ifsc-gray-text); }
+
 /* Search tabs */
 .ifsc-search-tabs { }
 .ifsc-tabs-nav { display: flex; gap: 8px; border-bottom: 1px solid var(--ifsc-border); margin-bottom: 16px; }

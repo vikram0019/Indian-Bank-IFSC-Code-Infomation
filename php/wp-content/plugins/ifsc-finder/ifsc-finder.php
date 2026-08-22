@@ -71,6 +71,7 @@ require_once IFSC_FINDER_DIR . 'shortcodes/search-tabs.php';
 require_once IFSC_FINDER_DIR . 'shortcodes/popular-banks.php';
 require_once IFSC_FINDER_DIR . 'shortcodes/faq-accordion.php';
 require_once IFSC_FINDER_DIR . 'shortcodes/ad-slot.php';
+require_once IFSC_FINDER_DIR . 'shortcodes/contact-form.php';
 require_once IFSC_FINDER_DIR . 'data/faq-content.php';
 
 /**
