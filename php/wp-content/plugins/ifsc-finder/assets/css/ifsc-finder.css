@@ -89,9 +89,10 @@
 .ifsc-ad-slot--sidebar { width: 300px; height: 250px; }
 .ifsc-ad-slot--footer { width: 100%; max-width: 728px; height: 90px; margin: 16px auto; }
 
-.ifsc-footer-links { text-align: center; padding: 8px 0 16px; }
+.ifsc-footer-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 12px; padding: 8px 0 16px; }
 .ifsc-footer-links a { font-size: 13px; color: var(--ifsc-muted); text-decoration: none; }
 .ifsc-footer-links a:hover { color: var(--ifsc-blue); text-decoration: underline; }
+.ifsc-footer-links a:not(:last-child) { border-right: 1px solid var(--ifsc-border); padding-right: 12px; }
 .ifsc-ad-slot--inline { width: 100%; max-width: 468px; height: 60px; margin: 32px auto 0; }
 
 /* Results table */

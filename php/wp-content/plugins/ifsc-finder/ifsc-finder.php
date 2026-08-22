@@ -83,9 +83,29 @@ add_action('wp_footer', function () {
     }
     echo '<div class="ifsc-container">' . ifsc_finder_ad_slot('footer') . '</div>';
 
+    $links = [];
+
+    $about_page = get_page_by_path('about-us');
+    if ($about_page) {
+        $links[] = ['url' => get_permalink($about_page), 'label' => 'About Us'];
+    }
+
+    $contact_page = get_page_by_path('contact-us');
+    if ($contact_page) {
+        $links[] = ['url' => get_permalink($contact_page), 'label' => 'Contact Us'];
+    }
+
     $privacy_url = function_exists('get_privacy_policy_url') ? get_privacy_policy_url() : '';
     if ($privacy_url) {
-        echo '<div class="ifsc-container ifsc-footer-links"><a href="' . esc_url($privacy_url) . '">Privacy Policy</a></div>';
+        $links[] = ['url' => $privacy_url, 'label' => 'Privacy Policy'];
+    }
+
+    if (!empty($links)) {
+        echo '<div class="ifsc-container ifsc-footer-links">';
+        foreach ($links as $link) {
+            echo '<a href="' . esc_url($link['url']) . '">' . esc_html($link['label']) . '</a>';
+        }
+        echo '</div>';
     }
 });
 
