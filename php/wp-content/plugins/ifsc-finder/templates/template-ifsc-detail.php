@@ -54,7 +54,7 @@ Ifsc_Seo::head_tags([
 get_header();
 ?>
 <main class="ifsc-main">
-    <div class="ifsc-container ifsc-layout">
+    <div class="ifsc-container">
         <div>
             <?php Ifsc_JsonLd::render_script(Ifsc_JsonLd::bank_or_credit_union($branch)); ?>
 
@@ -81,10 +81,7 @@ get_header();
                 <div class="ifsc-flag-row"><span>IMPS</span><?php ifsc_finder_flag_badge($branch['imps'] ? 'Available' : 'Not available', (bool) $branch['imps']); ?></div>
                 <div class="ifsc-flag-row"><span>UPI</span><?php ifsc_finder_flag_badge($branch['upi'] ? 'Available' : 'Not available', (bool) $branch['upi']); ?></div>
             </div>
-
-            <?php echo ifsc_finder_ad_slot('inline'); ?>
         </div>
-        <aside class="ifsc-sidebar"><?php echo ifsc_finder_ad_slot('sidebar'); ?></aside>
     </div>
 </main>
 <?php get_footer(); ?>

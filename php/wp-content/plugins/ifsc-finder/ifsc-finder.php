@@ -77,14 +77,15 @@ require_once IFSC_FINDER_DIR . 'shortcodes/contact-form.php';
 require_once IFSC_FINDER_DIR . 'data/faq-content.php';
 
 /**
- * Site-wide footer ad slot on every front-end page, mirrors the persistent
- * <AdSlot variant="footer" /> in client/src/app/layout.js's root layout.
+ * Site-wide footer links (About/Contact/Privacy). No manual ad slot here
+ * anymore — Auto Ads (see class-ifsc-adsense.php) places ads automatically
+ * wherever Google's algorithm decides, so a hand-reserved placeholder box
+ * is redundant once a client ID is configured.
  */
 add_action('wp_footer', function () {
     if (is_admin()) {
         return;
     }
-    echo '<div class="ifsc-container">' . ifsc_finder_ad_slot('footer') . '</div>';
 
     $links = [];
 

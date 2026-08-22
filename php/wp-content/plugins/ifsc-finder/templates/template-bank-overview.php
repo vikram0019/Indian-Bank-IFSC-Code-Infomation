@@ -41,7 +41,7 @@ Ifsc_Seo::head_tags([
 get_header();
 ?>
 <main class="ifsc-main">
-    <div class="ifsc-container ifsc-layout">
+    <div class="ifsc-container">
         <div>
             <a class="ifsc-back-link" href="<?php echo esc_url(home_url('/')); ?>">&larr; Back to search</a>
             <h1 class="ifsc-mt"><?php echo esc_html($bank_name); ?></h1>
@@ -71,7 +71,6 @@ get_header();
             <p id="ifsc-city-filter-empty" class="ifsc-muted" style="display:none;">No matching city or town found.</p>
             <nav id="ifsc-city-pagination" class="ifsc-pagination" aria-label="City pagination" hidden></nav>
         </div>
-        <aside class="ifsc-sidebar"><?php echo ifsc_finder_ad_slot('sidebar'); ?></aside>
     </div>
 </main>
 <?php get_footer(); ?>
