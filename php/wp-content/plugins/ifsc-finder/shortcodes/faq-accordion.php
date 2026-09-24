@@ -105,6 +105,13 @@ add_shortcode('ifsc_guide', function () {
                     get_page_by_path('ifsc-vs-swift-code'),
                     get_page_by_path('wrong-ifsc-code-what-happens'),
                     get_page_by_path('upi-vs-imps'),
+                    get_page_by_path('verify-bank-account-before-payment'),
+                    get_page_by_path('what-is-cancelled-cheque'),
+                    get_page_by_path('savings-vs-current-account'),
+                    get_page_by_path('link-aadhaar-bank-account'),
+                    get_page_by_path('bank-statement-vs-passbook'),
+                    get_page_by_path('how-to-close-bank-account'),
+                    get_page_by_path('how-to-report-bank-fraud'),
                 ]);
                 if (!empty($related)) :
                 ?>
