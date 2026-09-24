@@ -65,6 +65,23 @@ get_header();
             <h1><?php echo esc_html($bank_name); ?></h1>
             <p class="ifsc-muted"><?php echo esc_html($branch['branch']); ?></p>
 
+            <?php
+            $modes = array_filter([
+                $branch['neft'] ? 'NEFT' : null,
+                $branch['rtgs'] ? 'RTGS' : null,
+                $branch['imps'] ? 'IMPS' : null,
+                $branch['upi'] ? 'UPI' : null,
+            ]);
+            $modes_text = $modes ? implode(', ', $modes) : 'no electronic transfer methods currently on record';
+            ?>
+            <p class="ifsc-mt">
+                <?php echo esc_html($branch['ifsc']); ?> is the IFSC code for the <?php echo esc_html($bank_name); ?>
+                branch at <?php echo esc_html($branch['branch']); ?><?php echo $branch['city'] ? ' in ' . esc_html($branch['city']) : ''; ?>.
+                Use this code, along with the account number, whenever you're sending money to this branch via
+                <?php echo esc_html($modes_text); ?>. The MICR code below is what you'd need instead if you're writing
+                or depositing a cheque drawn on this branch.
+            </p>
+
             <div class="ifsc-detail-box">
                 <div class="ifsc-detail-row"><span>Address</span><span><?php echo esc_html($branch['address'] ?: 'N/A'); ?></span></div>
                 <div class="ifsc-detail-row"><span>City</span><span><?php echo esc_html($branch['city'] ?: 'N/A'); ?></span></div>

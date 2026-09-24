@@ -45,7 +45,11 @@ get_header();
         <div>
             <a class="ifsc-back-link" href="<?php echo esc_url(home_url('/')); ?>">&larr; Back to search</a>
             <h1 class="ifsc-mt"><?php echo esc_html($bank_name); ?></h1>
-            <p class="ifsc-muted ifsc-mb">Select a city or town to see <?php echo esc_html($bank_name); ?> branches and their IFSC codes.</p>
+            <p class="ifsc-muted ifsc-mb">
+                <?php echo esc_html($bank_name); ?> has branches in <?php echo (int) count($data['cities']); ?> cities and towns
+                listed below, each with its own unique IFSC code. Search or pick a city to see every <?php echo esc_html($bank_name); ?>
+                branch there, along with the address, MICR code, and which transfer methods (NEFT, RTGS, IMPS, UPI) each one supports.
+            </p>
 
             <input
                 type="text"
