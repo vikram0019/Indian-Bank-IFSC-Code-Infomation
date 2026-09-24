@@ -41,11 +41,15 @@ Ifsc_Seo::head_tags([
 get_header();
 ?>
 <main class="ifsc-main">
-    <div class="ifsc-container ifsc-layout">
+    <div class="ifsc-container">
         <div>
             <a class="ifsc-back-link" href="<?php echo esc_url(home_url('/')); ?>">&larr; Back to search</a>
             <h1 class="ifsc-mt"><?php echo esc_html($bank_name); ?></h1>
-            <p class="ifsc-muted ifsc-mb">Select a city or town to see <?php echo esc_html($bank_name); ?> branches and their IFSC codes.</p>
+            <p class="ifsc-muted ifsc-mb">
+                <?php echo esc_html($bank_name); ?> has branches in <?php echo (int) count($data['cities']); ?> cities and towns
+                listed below, each with its own unique IFSC code. Search or pick a city to see every <?php echo esc_html($bank_name); ?>
+                branch there, along with the address, MICR code, and which transfer methods (NEFT, RTGS, IMPS, UPI) each one supports.
+            </p>
 
             <input
                 type="text"
@@ -71,7 +75,6 @@ get_header();
             <p id="ifsc-city-filter-empty" class="ifsc-muted" style="display:none;">No matching city or town found.</p>
             <nav id="ifsc-city-pagination" class="ifsc-pagination" aria-label="City pagination" hidden></nav>
         </div>
-        <aside class="ifsc-sidebar"><?php echo ifsc_finder_ad_slot('sidebar'); ?></aside>
     </div>
 </main>
 <?php get_footer(); ?>

@@ -50,7 +50,7 @@ function ifsc_finder_get_faqs()
 
 function ifsc_finder_get_toc()
 {
-    return [
+    $toc = [
         ['id' => 'ifsc-explained', 'label' => 'IFSC codes, explained'],
         ['id' => 'finding-your-code', 'label' => 'Finding your code'],
         ['id' => 'why-it-matters', 'label' => 'Why it matters'],
@@ -60,6 +60,12 @@ function ifsc_finder_get_toc()
         ['id' => 'faq', 'label' => 'FAQs'],
         ['id' => 'popular-banks', 'label' => 'Popular banks'],
     ];
+
+    if (get_page_by_path('ifsc-vs-swift-code') || get_page_by_path('wrong-ifsc-code-what-happens') || get_page_by_path('upi-vs-imps')) {
+        $toc[] = ['id' => 'related-reading', 'label' => 'Related reading'];
+    }
+
+    return $toc;
 }
 
 function ifsc_finder_get_popular_banks()

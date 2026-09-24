@@ -93,6 +93,10 @@ class Ifsc_Admin_Page
                 <div class="notice notice-success"><p>AdSense settings saved.</p></div>
             <?php endif; ?>
 
+            <?php if (isset($_GET['recaptcha_saved'])) : ?>
+                <div class="notice notice-success"><p>reCAPTCHA settings saved.</p></div>
+            <?php endif; ?>
+
             <div style="display:flex; gap:16px; margin: 16px 0;">
                 <div style="border:1px solid #dcdcde; border-radius:6px; padding:16px; min-width:180px;">
                     <p style="margin:0; color:#646970;">Total Branches</p>
@@ -188,6 +192,48 @@ class Ifsc_Admin_Page
                     </tr>
                 </table>
                 <button type="submit" class="button button-primary">Save AdSense Settings</button>
+            </form>
+
+            <h2 style="margin-top:24px;">reCAPTCHA</h2>
+            <p class="description">
+                Site key and secret key from
+                <a href="https://www.google.com/recaptcha/admin" target="_blank" rel="noopener">Google reCAPTCHA</a>
+                (v2, "I'm not a robot" checkbox) — protects the <code>[ifsc_contact_form]</code>
+                shortcode on the Contact Us page from spam submissions. The form still works
+                with just the honeypot field if left blank.
+            </p>
+            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+                <input type="hidden" name="action" value="ifsc_finder_save_recaptcha">
+                <?php wp_nonce_field('ifsc_finder_save_recaptcha'); ?>
+                <table class="form-table">
+                    <tr>
+                        <th scope="row"><label for="recaptcha_site_key">Site key</label></th>
+                        <td>
+                            <input
+                                type="text"
+                                id="recaptcha_site_key"
+                                name="recaptcha_site_key"
+                                value="<?php echo esc_attr(Ifsc_Recaptcha::get_site_key()); ?>"
+                                placeholder="6Lc..."
+                                class="regular-text"
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="recaptcha_secret_key">Secret key</label></th>
+                        <td>
+                            <input
+                                type="text"
+                                id="recaptcha_secret_key"
+                                name="recaptcha_secret_key"
+                                value="<?php echo esc_attr(Ifsc_Recaptcha::get_secret_key()); ?>"
+                                placeholder="6Lc..."
+                                class="regular-text"
+                            >
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit" class="button button-primary">Save reCAPTCHA Settings</button>
             </form>
         </div>
         <?php

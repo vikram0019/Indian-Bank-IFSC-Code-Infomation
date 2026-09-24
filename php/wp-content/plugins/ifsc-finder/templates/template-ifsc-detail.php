@@ -54,7 +54,7 @@ Ifsc_Seo::head_tags([
 get_header();
 ?>
 <main class="ifsc-main">
-    <div class="ifsc-container ifsc-layout">
+    <div class="ifsc-container">
         <div>
             <?php Ifsc_JsonLd::render_script(Ifsc_JsonLd::bank_or_credit_union($branch)); ?>
 
@@ -64,6 +64,23 @@ get_header();
             <p class="ifsc-code-large"><?php echo esc_html($branch['ifsc']); ?></p>
             <h1><?php echo esc_html($bank_name); ?></h1>
             <p class="ifsc-muted"><?php echo esc_html($branch['branch']); ?></p>
+
+            <?php
+            $modes = array_filter([
+                $branch['neft'] ? 'NEFT' : null,
+                $branch['rtgs'] ? 'RTGS' : null,
+                $branch['imps'] ? 'IMPS' : null,
+                $branch['upi'] ? 'UPI' : null,
+            ]);
+            $modes_text = $modes ? implode(', ', $modes) : 'no electronic transfer methods currently on record';
+            ?>
+            <p class="ifsc-mt">
+                <?php echo esc_html($branch['ifsc']); ?> is the IFSC code for the <?php echo esc_html($bank_name); ?>
+                branch at <?php echo esc_html($branch['branch']); ?><?php echo $branch['city'] ? ' in ' . esc_html($branch['city']) : ''; ?>.
+                Use this code, along with the account number, whenever you're sending money to this branch via
+                <?php echo esc_html($modes_text); ?>. The MICR code below is what you'd need instead if you're writing
+                or depositing a cheque drawn on this branch.
+            </p>
 
             <div class="ifsc-detail-box">
                 <div class="ifsc-detail-row"><span>Address</span><span><?php echo esc_html($branch['address'] ?: 'N/A'); ?></span></div>
@@ -81,10 +98,7 @@ get_header();
                 <div class="ifsc-flag-row"><span>IMPS</span><?php ifsc_finder_flag_badge($branch['imps'] ? 'Available' : 'Not available', (bool) $branch['imps']); ?></div>
                 <div class="ifsc-flag-row"><span>UPI</span><?php ifsc_finder_flag_badge($branch['upi'] ? 'Available' : 'Not available', (bool) $branch['upi']); ?></div>
             </div>
-
-            <?php echo ifsc_finder_ad_slot('inline'); ?>
         </div>
-        <aside class="ifsc-sidebar"><?php echo ifsc_finder_ad_slot('sidebar'); ?></aside>
     </div>
 </main>
 <?php get_footer(); ?>

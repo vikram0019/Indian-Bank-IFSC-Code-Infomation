@@ -29,6 +29,7 @@ require_once IFSC_FINDER_DIR . 'includes/class-ifsc-cron.php';
 require_once IFSC_FINDER_DIR . 'includes/class-ifsc-jsonld.php';
 require_once IFSC_FINDER_DIR . 'includes/class-ifsc-adsense.php';
 require_once IFSC_FINDER_DIR . 'includes/class-ifsc-seo.php';
+require_once IFSC_FINDER_DIR . 'includes/class-ifsc-recaptcha.php';
 
 if (defined('WP_CLI') && WP_CLI) {
     require_once IFSC_FINDER_DIR . 'includes/class-ifsc-cli-command.php';
@@ -44,6 +45,7 @@ Ifsc_Sitemap::init();
 Ifsc_Cron::init();
 Ifsc_JsonLd::init();
 Ifsc_AdSense::init();
+Ifsc_Recaptcha::init();
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('ifsc-finder', IFSC_FINDER_URL . 'assets/css/ifsc-finder.css', [], IFSC_FINDER_VERSION);
@@ -71,21 +73,43 @@ require_once IFSC_FINDER_DIR . 'shortcodes/search-tabs.php';
 require_once IFSC_FINDER_DIR . 'shortcodes/popular-banks.php';
 require_once IFSC_FINDER_DIR . 'shortcodes/faq-accordion.php';
 require_once IFSC_FINDER_DIR . 'shortcodes/ad-slot.php';
+require_once IFSC_FINDER_DIR . 'shortcodes/contact-form.php';
 require_once IFSC_FINDER_DIR . 'data/faq-content.php';
 
 /**
- * Site-wide footer ad slot on every front-end page, mirrors the persistent
- * <AdSlot variant="footer" /> in client/src/app/layout.js's root layout.
+ * Site-wide footer links (About/Contact/Privacy). No manual ad slot here
+ * anymore — Auto Ads (see class-ifsc-adsense.php) places ads automatically
+ * wherever Google's algorithm decides, so a hand-reserved placeholder box
+ * is redundant once a client ID is configured.
  */
 add_action('wp_footer', function () {
     if (is_admin()) {
         return;
     }
-    echo '<div class="ifsc-container">' . ifsc_finder_ad_slot('footer') . '</div>';
+
+    $links = [];
+
+    $about_page = get_page_by_path('about-us');
+    if ($about_page) {
+        $links[] = ['url' => get_permalink($about_page), 'label' => 'About Us'];
+    }
+
+    $contact_page = get_page_by_path('contact-us');
+    if ($contact_page) {
+        $links[] = ['url' => get_permalink($contact_page), 'label' => 'Contact Us'];
+    }
 
     $privacy_url = function_exists('get_privacy_policy_url') ? get_privacy_policy_url() : '';
     if ($privacy_url) {
-        echo '<div class="ifsc-container ifsc-footer-links"><a href="' . esc_url($privacy_url) . '">Privacy Policy</a></div>';
+        $links[] = ['url' => $privacy_url, 'label' => 'Privacy Policy'];
+    }
+
+    if (!empty($links)) {
+        echo '<div class="ifsc-container ifsc-footer-links">';
+        foreach ($links as $link) {
+            echo '<a href="' . esc_url($link['url']) . '">' . esc_html($link['label']) . '</a>';
+        }
+        echo '</div>';
     }
 });
 

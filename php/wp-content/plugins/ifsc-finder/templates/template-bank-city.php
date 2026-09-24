@@ -44,15 +44,18 @@ Ifsc_Seo::head_tags([
 get_header();
 ?>
 <main class="ifsc-main">
-    <div class="ifsc-container ifsc-layout ifsc-layout--stack">
+    <div class="ifsc-container">
         <div>
             <a class="ifsc-back-link" href="<?php echo esc_url(home_url('/')); ?>">&larr; Back to search</a>
             <h1 class="ifsc-mt"><?php echo esc_html($bank_name); ?> Branches in <?php echo esc_html($city_name); ?></h1>
-            <p class="ifsc-muted ifsc-mb"><?php echo esc_html($data['total']); ?> branch(es) found</p>
+            <p class="ifsc-muted ifsc-mb">
+                <?php echo (int) $data['total']; ?> <?php echo esc_html($bank_name); ?> branch(es) found in <?php echo esc_html($city_name); ?>.
+                Each row below is a separate branch with its own IFSC code — match the branch name or address to the one
+                you need, then use that row's IFSC code (and MICR code, for cheques) when sending or receiving money there.
+            </p>
 
             <?php ifsc_finder_results_table($data['results']); ?>
         </div>
-        <aside class="ifsc-sidebar"><?php echo ifsc_finder_ad_slot('sidebar'); ?></aside>
     </div>
 </main>
 <?php get_footer(); ?>
